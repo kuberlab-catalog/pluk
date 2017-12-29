@@ -2,6 +2,7 @@ pluk:
   Image:
     Name: kuberlab/pluk
     Tag: latest
+  masters: ""
   auth:
     enabled: false
     url: http://cloud-dealer:8082/api/v0.2/auth/whoami

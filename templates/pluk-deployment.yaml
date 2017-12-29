@@ -28,6 +28,10 @@ spec:
           - name: AUTH_VALIDATION
             value: "{{ .Values.pluk.auth.url }}"
           {{- end }}
+          {{- if .Values.pluk.masters }}
+          - name: MASTERS
+            value: "{{ .Values.pluk.masters }}"
+          {{- end }}
           - name: DEBUG
             value: "false"
           - name: GIT_BARE_DIR
