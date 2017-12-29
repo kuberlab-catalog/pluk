@@ -6,11 +6,13 @@ metadata:
     component: pluk
   name: pluk
 spec:
+  type: NodePort
   ports:
   - name: http
     port: 8082
     protocol: TCP
     targetPort: 8082
+    nodePort: 30802
   selector:
     app: kuberlab
     component: pluk
