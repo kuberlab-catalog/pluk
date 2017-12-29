@@ -1,0 +1,15 @@
+Description: Simple dataset managment system
+Engine: gotpl
+Home: http://kuberlab.com
+Icon: https://storage.googleapis.com/kuberlab/static/favicon.ico
+Keywords:
+- kubernetes
+- dataset
+- pluk
+- management
+- kuberlab
+Maintainers:
+- Email: agunin@kuberlab.com
+  Name: Gunin Alexander
+Name: pluk
+Version: 1.0.0

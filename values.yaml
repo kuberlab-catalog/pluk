@@ -1,0 +1,25 @@
+pluk:
+  Image:
+    Name: kuberlab/pluk
+    Tag: latest
+  auth:
+    enabled: false
+    url: http://cloud-dealer:8082/api/v0.2/auth/whoami
+    internalKey: ""
+  persistence:
+    fromProvider: true
+    gitSize: 10Gi
+    dataSize: 100Gi
+    gitVolume:
+      hostPath:
+        path: /var/lib/pluk/git
+    dataVolume:
+      hostPath:
+        path: /var/lib/pluk/data
+  nodeSelector:
+    enabled: false
+    labels:
+      pluk: pluk
+
+global:
+  useRBAC: true

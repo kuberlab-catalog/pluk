@@ -1,0 +1,15 @@
+{{- if .Values.pluk.persistence.fromProvider -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pluk-git
+spec:
+  {{- if .Values.pluk.persistence.storageClass }}
+  storageClassName: {{ .Values.pluk.persistence.storageClass | quote }}
+  {{- end }}
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: {{ .Values.pluk.persistence.gitSize }}
+{{- end -}}

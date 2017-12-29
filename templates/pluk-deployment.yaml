@@ -1,0 +1,73 @@
+{{- if .Values.pluk.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pluk
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kuberlab
+        component: pluk
+    spec:
+      containers:
+        - name: pluk
+          image: "{{ printf "%s:%s" .Values.pluk.Image.Name .Values.pluk.Image.Tag }}"
+          readinessProbe:
+            httpGet:
+              path: /probe
+              port: 8082
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 3
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+          {{- if .Values.pluk.auth.enabled }}
+          - name: AUTH_VALIDATION
+            value: "{{ .Values.pluk.auth.url }}"
+          {{- end }}
+          - name: DEBUG
+            value: "false"
+          - name: GIT_BARE_DIR
+            value: "/git"
+          - name: DATA_DIR
+            value: "/data"
+          - name: GIT_LOCAL_DIR
+            value: /git-local
+          {{- if .Values.pluk.auth.internalKey }}
+          - name: INTERNAL_KEY
+            valueFrom:
+              secretKeyRef:
+                name: pluk-key
+                key: internalKey
+          {{- end }}
+          ports:
+          - containerPort: 8082
+            name: api
+          volumeMounts:
+          - name: git
+            mountPath: /git
+            subPath: git
+          - name: git
+            mountPath: /git-local
+            subPath: git-local
+          - name: data
+            mountPath: /data
+      volumes:
+      - name: git
+        {{- if .Values.pluk.persistence.fromProvider }}
+        persistentVolumeClaim:
+          claimName: pluk-git
+        {{- else }}
+{{ toYaml .Values.pluk.persistence.volume | indent 8 }}
+        {{- end }}
+      - name: data
+        {{- if .Values.pluk.persistence.fromProvider }}
+        persistentVolumeClaim:
+          claimName: pluk-data
+        {{- else }}
+{{ toYaml .Values.pluk.persistence.volume | indent 8 }}
+        {{- end }}
+{{- end }}
