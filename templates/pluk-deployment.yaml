@@ -13,15 +13,15 @@ spec:
       containers:
         - name: pluk
           image: "{{ printf "%s:%s" .Values.pluk.Image.Name .Values.pluk.Image.Tag }}"
-          readinessProbe:
-            httpGet:
-              path: /probe
-              port: 8082
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 3
-            successThreshold: 1
-            failureThreshold: 3
+#          readinessProbe:
+#            httpGet:
+#              path: /probe
+#              port: 8082
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#            timeoutSeconds: 3
+#            successThreshold: 1
+#            failureThreshold: 3
           env:
           {{- if .Values.pluk.auth.enabled }}
           - name: AUTH_VALIDATION
