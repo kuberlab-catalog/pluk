@@ -58,7 +58,7 @@ spec:
             subPath: git-local
           - name: data
             mountPath: /data
-          - name: data
+          - name: db
             mountPath: /pluk
       volumes:
       - name: git
