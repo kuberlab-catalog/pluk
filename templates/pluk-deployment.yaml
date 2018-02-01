@@ -75,7 +75,7 @@ spec:
         {{- else }}
 {{ toYaml .Values.pluk.persistence.volume | indent 8 }}
         {{- end }}
-      - name: data
+      - name: db
         {{- if .Values.pluk.persistence.fromProvider }}
         persistentVolumeClaim:
           claimName: pluk-db
