@@ -11,6 +11,7 @@ pluk:
     fromProvider: true
     gitSize: 10Gi
     dataSize: 100Gi
+    dbSize: 10Gi
     storageClass: anything
     storageClassDB: anything
     gitVolume:
