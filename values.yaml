@@ -11,6 +11,8 @@ pluk:
     fromProvider: true
     gitSize: 10Gi
     dataSize: 100Gi
+    storageClass: anything
+    storageClassDB: anything
     gitVolume:
       hostPath:
         path: /var/lib/pluk/git

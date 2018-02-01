@@ -58,6 +58,8 @@ spec:
             subPath: git-local
           - name: data
             mountPath: /data
+          - name: data
+            mountPath: /pluk
       volumes:
       - name: git
         {{- if .Values.pluk.persistence.fromProvider }}
@@ -70,6 +72,13 @@ spec:
         {{- if .Values.pluk.persistence.fromProvider }}
         persistentVolumeClaim:
           claimName: pluk-data
+        {{- else }}
+{{ toYaml .Values.pluk.persistence.volume | indent 8 }}
+        {{- end }}
+      - name: data
+        {{- if .Values.pluk.persistence.fromProvider }}
+        persistentVolumeClaim:
+          claimName: pluk-db
         {{- else }}
 {{ toYaml .Values.pluk.persistence.volume | indent 8 }}
         {{- end }}
