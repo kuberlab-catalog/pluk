@@ -9,14 +9,10 @@ pluk:
     internalKey: ""
   persistence:
     fromProvider: true
-    gitSize: 10Gi
     dataSize: 100Gi
     dbSize: 10Gi
     #storageClass: anything
     #storageClassDB: anything
-    gitVolume:
-      hostPath:
-        path: /var/lib/pluk/git
     dataVolume:
       hostPath:
         path: /var/lib/pluk/data
