@@ -50,12 +50,6 @@ spec:
           - containerPort: 8082
             name: api
           volumeMounts:
-          - name: git
-            mountPath: /git
-            subPath: git
-          - name: git
-            mountPath: /git-local
-            subPath: git-local
           - name: data
             mountPath: /data
           - name: db
