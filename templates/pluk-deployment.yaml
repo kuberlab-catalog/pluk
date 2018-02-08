@@ -61,13 +61,6 @@ spec:
           - name: db
             mountPath: /pluk
       volumes:
-      - name: git
-        {{- if .Values.pluk.persistence.fromProvider }}
-        persistentVolumeClaim:
-          claimName: pluk-git
-        {{- else }}
-{{ toYaml .Values.pluk.persistence.volume | indent 8 }}
-        {{- end }}
       - name: data
         {{- if .Values.pluk.persistence.fromProvider }}
         persistentVolumeClaim:
