@@ -33,8 +33,6 @@ spec:
           {{- end }}
           - name: DEBUG
             value: "false"
-          - name: GIT_BARE_DIR
-            value: "/git"
           - name: DATA_DIR
             value: "/data"
           - name: GIT_LOCAL_DIR
@@ -60,12 +58,12 @@ spec:
         persistentVolumeClaim:
           claimName: pluk-data
         {{- else }}
-{{ toYaml .Values.pluk.persistence.volume | indent 8 }}
+{{ toYaml .Values.pluk.persistence.dataVolume | indent 8 }}
         {{- end }}
       - name: db
         {{- if .Values.pluk.persistence.fromProvider }}
         persistentVolumeClaim:
           claimName: pluk-db
         {{- else }}
-{{ toYaml .Values.pluk.persistence.volume | indent 8 }}
+{{ toYaml .Values.pluk.persistence.dbVolume | indent 8 }}
         {{- end }}

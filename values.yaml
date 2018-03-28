@@ -13,6 +13,9 @@ pluk:
     dbSize: 10Gi
     #storageClass: anything
     #storageClassDB: anything
+    dbVolume:
+      hostPath:
+        path: /var/lib/pluk/data
     dataVolume:
       hostPath:
         path: /var/lib/pluk/data
