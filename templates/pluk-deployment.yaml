@@ -10,6 +10,12 @@ spec:
         app: kuberlab
         component: pluk
     spec:
+      {{- if .Values.pluk.nodeSelector.enabled }}
+      nodeSelector:
+      {{- range $key, $value := .Values.pluk.nodeSelector.labels }}
+        {{ $key }}: "{{ $value }}"
+      {{- end }}
+      {{- end }}
       containers:
         - name: pluk
           image: "{{ printf "%s:%s" .Values.pluk.Image.Name .Values.pluk.Image.Tag }}"
