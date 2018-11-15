@@ -41,14 +41,38 @@ spec:
             value: "false"
           - name: DATA_DIR
             value: "/data"
-          - name: GIT_LOCAL_DIR
-            value: /git-local
           {{- if .Values.pluk.auth.internalKey }}
           - name: INTERNAL_KEY
             valueFrom:
               secretKeyRef:
                 name: pluk-key
                 key: internalKey
+          {{- end }}
+          - name: DB_TYPE
+            value: {{ .Values.pluk.db.type }}
+          - name: DB_NAME
+            value: {{ .Values.pluk.db.name }}
+          - name: DB_HOST
+            value: {{ .Values.pluk.db.host }}
+          - name: DB_USER
+            value: {{ .Values.pluk.db.user }}
+          {{- if or .Values.pluk.db.password.plain (and .Values.pluk.db.password.fromSecret.name .Values.pluk.db.password.fromSecret.key)}}
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+              {{- if and .Values.pluk.db.password.fromSecret.name .Values.pluk.db.password.fromSecret.key }}
+                name: {{ .Values.pluk.db.password.fromSecret.name }}
+                key: {{ .Values.pluk.db.password.fromSecret.key }}
+              {{- else }}
+                {{- if .Values.pluk.db.password.plain }}
+                name: pluk-key
+                key: postgres-password
+                {{- end }}
+              {{- end }}
+          {{- end }}
+          {{- range .Values.pluk.envVars }}
+          - name: {{ .name }}
+            value: '{{ .value }}'
           {{- end }}
           ports:
           - containerPort: 8082
