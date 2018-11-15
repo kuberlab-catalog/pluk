@@ -3,7 +3,7 @@ pluk:
     Name: kuberlab/pluk
     Tag: latest
   masters: ""
-  nodePort: 30803
+  nodePort: 30802
   auth:
     enabled: false
     url: http://cloud-dealer:8082/api/v0.2/auth/whoami
@@ -25,17 +25,17 @@ pluk:
     labels:
       pluk: pluk
   db:
-    type: postgres
+    type: sqlite3
     # allowed:
     # type: postgres
     # type: sqlite3
-    name: 'pluke'
-    host: 'mlboard-postgresql'
-    user: 'postgres'
+    name: ''
+    host: ''
+    user: ''
     password:
       fromSecret:
-        name: 'mlboard-postgresql'
-        key: 'postgres-password'
+        name: ''
+        key: ''
       plain: ''
   envVars: []
   # - name: VAR
