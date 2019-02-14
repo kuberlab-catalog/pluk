@@ -13,7 +13,7 @@ spec:
     protocol: TCP
     targetPort: 8082
     nodePort: {{ .Values.pluk.nodePort }}
-  - name: http
+  - name: grpc
     port: 8085
     protocol: TCP
     targetPort: 8085
