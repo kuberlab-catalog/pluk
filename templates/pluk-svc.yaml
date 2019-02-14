@@ -13,6 +13,11 @@ spec:
     protocol: TCP
     targetPort: 8082
     nodePort: {{ .Values.pluk.nodePort }}
+  - name: http
+    port: 8085
+    protocol: TCP
+    targetPort: 8085
+    nodePort: 30805
   selector:
     app: kuberlab
     component: pluk
