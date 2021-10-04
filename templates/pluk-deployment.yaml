@@ -2,7 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pluk
+  labels:
+    app: kuberlab
+    component: pluk
 spec:
+  selector:
+    matchLabels:
+      app: kuberlab
+      component: pluk
   replicas: 1
   template:
     metadata:
